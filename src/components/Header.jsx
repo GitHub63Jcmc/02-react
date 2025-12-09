@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 function Header () {
   return (
     <header>
@@ -10,9 +12,12 @@ function Header () {
         DevJobs
       </h1>
       <nav>
-        <a href="index.html">Inicio</a>
+        {/* <a href="index.html">Inicio</a>
         <a href="empleos.html">Empleos</a>
-        <a href="react.html">React</a>
+        <a href="react.html">React</a> */}
+        <Link to="/">Inicio</Link> 
+        <Link to="/empleos">Empleos</Link> 
+        <Link to="/react">React</Link>
       </nav>
     </header>
   )
