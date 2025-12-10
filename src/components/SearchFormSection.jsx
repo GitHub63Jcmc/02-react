@@ -7,8 +7,12 @@ export function SearchFormSection ({onTextFilter, onSearch}) {
   const idExperienceLevel = useId();
 
   const handleSubmit = (event) => {
+    console.log('submit');
     event.preventDefault();
-    const formData = new FormData(event.target);
+
+    // hay una diferencia entre event.target !== evente.currentTarget, este ultimo está escuchando
+    const formData = new FormData(event.currentTarget);
+
     const filters = {
       technology: formData.get(idTechnology),
       location: formData.get(idLocation),
@@ -27,7 +31,7 @@ export function SearchFormSection ({onTextFilter, onSearch}) {
     <section className="jobs-search">
       <h1>Encuentra tu próximo trabajo</h1>
       <p>Explora miles de oportunidades en el sector tecnológico.</p>
-      <form onSubmit={handleSubmit} id="empleos-search-form" role="search">
+      <form onChange={handleSubmit} id="empleos-search-form" role="search">
         <div className="search-bar">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"
@@ -39,7 +43,7 @@ export function SearchFormSection ({onTextFilter, onSearch}) {
           <input name={idText} id="empleos-search-input" type="text"
             placeholder="Buscar trabajos, empresas o habilidades" onChange={handleTextChange}
           />
-          <button type="submit" style={{position: 'absolute', right: '5px'}}>Buscar</button>
+          {/* <button type="submit" style={{position: 'absolute', right: '5px'}}>Buscar</button> */}
         </div>
 
         <div className="search-filters">

@@ -1,16 +1,14 @@
-import { Routes, Route } from 'react-router-dom';
 import {useState} from 'react';
-import Header from '../components/Header.jsx';
-import Footer from '../components/Footer.jsx';
-import Pagination from '../components/Pagination.jsx';
-import SearchFormSection from '../components/SearchFormSection.jsx';
-import JobsListings from '../components/JobsListings.jsx';
 
-import jobsData from '../assets/data.json';
+import {Pagination} from '../components/Pagination.jsx';
+import {SearchFormSection} from '../components/SearchFormSection.jsx';
+import {JobsListings} from '../components/JobsListings.jsx';
+
+import jobsData from '../data.json';
 
 const RESULTS_PER_PAGE = 4;
 
-function App() {
+export function SearchPage() {
   const [filters, setFilters] = useState({
     technology: '',
     location: '',
@@ -54,22 +52,12 @@ function App() {
   };
 
   return (
-    <>
-      <Header />
-
-      <main>
-        <SearchFormSection onSearch={handleSearch} onTextFilter={handleTextFilter} />
-
-        <section>
-          <JobsListings jobs={pageResults} />
-          <Pagination currentPage = {currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
-        </section>
-
-      </main>
-
-      <Footer />
-    </>
+    <main>
+      <SearchFormSection onSearch={handleSearch} onTextFilter={handleTextFilter} />
+      <section>
+        <JobsListings jobs={pageResults} />
+        <Pagination currentPage = {currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+      </section>
+    </main>
   )
 }
-
-export default App
