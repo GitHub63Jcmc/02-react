@@ -1,16 +1,11 @@
-import {useId} from 'react';
+import { useId, useState} from 'react';
 
-export function SearchFormSection ({onTextFilter, onSearch}) {
-  const idText = useId();
-  const idTechnology = useId();
-  const idLocation = useId();
-  const idExperienceLevel = useId();
+const useSearchForm = (idTechnology, idLocation, idExperienceLevel, onSearch, onTextFilter) => {
+  const [searchText, setSearchText] = useState('');
 
   const handleSubmit = (event) => {
-    console.log('submit');
     event.preventDefault();
 
-    // hay una diferencia entre event.target !== evente.currentTarget, este ultimo está escuchando
     const formData = new FormData(event.currentTarget);
 
     const filters = {
@@ -18,14 +13,34 @@ export function SearchFormSection ({onTextFilter, onSearch}) {
       location: formData.get(idLocation),
       experienceLevel: formData.get(idExperienceLevel)
     };
+
     onSearch(filters);
-  }
+  };
 
   const handleTextChange = (event) => {
     const text = event.target.value;
+    setSearchText(text);
     onTextFilter(text);
-
   }
+
+  return {
+    searchText,
+    handleSubmit,
+    handleTextChange
+  };
+
+}
+
+export function SearchFormSection ({onTextFilter, onSearch}) {
+  const idText = useId();
+  const idTechnology = useId();
+  const idLocation = useId();
+  const idExperienceLevel = useId();
+
+  const {
+    handleSubmit, 
+    handleTextChange
+  } = useSearchForm(idTechnology, idLocation, idExperienceLevel, onSearch, onTextFilter );
 
   return (
     <section className="jobs-search">
