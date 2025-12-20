@@ -17,4 +17,8 @@ function App() {
   );
 }
 
+// ejercicios:
+  // crear una nueva ruta /about
+  // crear una nueva ruta /contacto y en esta usar el useState para manejar valores del formulario, crear castingHooks, validación basica y mostrar mensajes de error si es necesario, los campos requeridos, mostrar mensaje enviado.
+  // mejorar el componente link
 export default App
