@@ -1,16 +1,38 @@
-import { useRouter } from '../hooks/useRouter';
+// import { useRouter } from '../hooks/useRouter';
+
+// export function Link ({ href, children, ...restOfProps}) {
+//   const { navigateTo } = useRouter();
+
+//   const handleClick = (event) => {
+//     event.preventDefault();
+    
+//     navigateTo(href);
+//   }
+
+//   return  (
+//     <a href={href} {...restOfProps} onClick={handleClick}>
+//       {children}
+//     </a>
+//   )
+// }
+
 
 export function Link ({ href, children, ...restOfProps}) {
-  const { navigateTo } = useRouter();
-
   const handleClick = (event) => {
-    event.preventDefault();
-    
-    navigateTo(href);
-  }
+    // 🚀 MEJORA: Detectar si el usuario quiere abrir en pestaña nueva
+    const isMainButton = event.button === 0; // Clic izquierdo
+    const isModifiedEvent = event.metaKey || event.altKey || event.ctrlKey || event.shiftKey;
+    const isManageableEvent = isMainButton && !isModifiedEvent;
 
+    if (isManageableEvent) {
+      event.preventDefault();
+      window.history.pushState({}, '', href);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  }
+  
   return  (
-    <a href={href} {...restOfProps} onClick={handleClick}>
+    <a href={href} {...restOfProps} onClick={handleClick} target={restOfProps.target}>
       {children}
     </a>
   )
