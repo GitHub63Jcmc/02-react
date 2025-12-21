@@ -15,9 +15,10 @@ export function Header () {
       </Link>
 
       <nav>
+        <Link href="/">Inicio</Link>
         <Link href="/search">Empleos</Link>
         <Link href="/about">Nosotros</Link>
-        <Link href="/contacto">Contacto</Link>
+        <Link href="/contact">Contacto</Link>
       </nav>
     </header>
   )

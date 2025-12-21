@@ -234,6 +234,21 @@ form input[type="text"]::placeholder {
   color: #64748b;
 }
 
+/* -------- del formulario contacto ------- */
+form input, textarea{ 
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1.2rem;
+  background: white;
+  color: var(--text-primary);
+  color: rgb(41, 39, 39);
+  padding: 10px 0.5rem;
+  border-radius: 5px;
+}
+/* -------- fin formulario contacto ------- */
+
 button {
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
