@@ -15,8 +15,10 @@
   --primary-hover: #0d5ba8;
   --primary-light: #09f;
   --background: #06182a;
+  --text-text: #1e1f1f;
   --text-primary: #ffffff;
   --text-secondary: #cbd5e1;
+  --text-secondary2: #cbd5e1;
   --text-muted: #94a3b8;
   --border: rgba(255, 255, 255, 0.1);
   --card-bg: #1e293b;
@@ -241,9 +243,8 @@ form input, textarea{
   font-family: inherit;
   font-weight: bold;
   font-size: 1.2rem;
-  background: white;
-  color: var(--text-primary);
-  color: rgb(41, 39, 39);
+  background-color: var(--text-secondary2);
+  color: var(--text-text);
   padding: 10px 0.5rem;
   border-radius: 5px;
 }
