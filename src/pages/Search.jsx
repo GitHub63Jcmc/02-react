@@ -26,8 +26,16 @@ const [currentPage, setCurrentPage] = useState(1);
     async function fetchJobs() {
       try {
         setLoading(true);
+
+        const params = new URLSearchParams();
+        if (textToFilter) params.append('text', textToFilter);
+        if (filters.technology) params.append('technology', filters.technology);
+        if (filters.location) params.append('type', filters.location);
+        if (filters.experienceLevel) params.append('level', filters.experienceLevel);
+
+        const queryParams = params.toString();
         
-        const response = await fetch('https://jscamp-api.vercel.app/api/jobs');
+        const response = await fetch(`https://jscamp-api.vercel.app/api/jobs?${queryParams}`);
         const json = await response.json();
 
         setJobs(json.data);
@@ -39,7 +47,7 @@ const [currentPage, setCurrentPage] = useState(1);
       }
     }
     fetchJobs();
-  }, []);
+  }, [filters, textToFilter, currentPage]);
 
   const totalPages = Math.ceil(jobs.length / RESULTS_PER_PAGE);
 
@@ -93,7 +101,7 @@ export function SearchPage() {
         {
           loading ? <p>Carregando empleos...</p> : <JobsListings jobs={jobs} />
         }
-        <JobsListings jobs={jobs} />
+        {/* <JobsListings jobs={jobs} /> */}
         <Pagination currentPage = {currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       </section>
     </main>
