@@ -28,6 +28,7 @@ const [currentPage, setCurrentPage] = useState(1);
         setLoading(true);
 
         const params = new URLSearchParams();
+        
         if (textToFilter) params.append('text', textToFilter);
         if (filters.technology) params.append('technology', filters.technology);
         if (filters.location) params.append('type', filters.location);
