@@ -26,9 +26,6 @@ const [currentPage, setCurrentPage] = useState(1);
     async function fetchJobs() {
       try {
         setLoading(true);
-
-        // delay 5s
-        await new Promise((resolve) => setTimeout(resolve, 5000));
         
         const response = await fetch('https://jscamp-api.vercel.app/api/jobs');
         const json = await response.json();
@@ -93,6 +90,9 @@ export function SearchPage() {
     <main>
       <SearchFormSection onSearch={handleSearch} onTextFilter={handleTextFilter} />
       <section>
+        {
+          loading ? <p>Carregando empleos...</p> : <JobsListings jobs={jobs} />
+        }
         <JobsListings jobs={jobs} />
         <Pagination currentPage = {currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       </section>
