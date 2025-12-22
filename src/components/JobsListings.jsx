@@ -20,3 +20,4 @@ export function JobsListings ({jobs}) {
 }
 
 export default JobsListings;
+
