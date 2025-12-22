@@ -232,23 +232,31 @@ form input[type="text"] {
   font-family: inherit;
 }
 
+/* ----------------------------------------------------------------- */
+/* Añade esto para que el input de email y textarea se comporten igual */
+form input[type="email"],
+form textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  padding: 0.75rem 0.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+form textarea::placeholder,
+form input[type="email"]::placeholder {
+  color: #64748b;
+}
+/* ----------------------------------------------------------------- */
+
 form input[type="text"]::placeholder {
   color: #64748b;
 }
 
-/* -------- del formulario contacto ------- */
-form input, textarea{ 
-  border: none;
-  outline: none;
-  font-family: inherit;
-  font-weight: bold;
-  font-size: 1.2rem;
-  background-color: var(--text-secondary2);
-  color: var(--text-text);
-  padding: 10px 0.5rem;
-  border-radius: 5px;
-}
-/* -------- fin formulario contacto ------- */
+
 
 button {
   padding: 0.75rem 1.5rem;
@@ -407,6 +415,19 @@ article {
     color: var(--text-muted);
     margin-bottom: 1.5rem;
   }
+
+/* ------------------------------------------------------------------------ */
+.jobs-search {
+  text-align: center; /* Centra el texto del párrafo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.jobs-search h1 {
+  justify-content: center; /* Centra el contenido del h1 flex */
+}
+/* ------------------------------------------------------------------------ */
 
   .search-bar {
     background: var(--input-bg);

@@ -14,28 +14,69 @@ export function ContactPage() {
     validate
   );
 
-  if (isSent) return <p style={{color: 'green'}}>¡Mensaje enviado con éxito!</p>;
+  if (isSent) return (
+    <main style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh'}}>
+       <p style={{color: 'var(--primary-light)', fontSize: '1.5rem', fontWeight: 'bold'}}>
+         ¡Mensaje enviado con éxito!
+       </p>
+    </main>
+  );
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '800px', margin: '50px auto' }}>
-      <h1 style={{alignSelf: 'center'}}>Contacto</h1>
-      <input name="nombre" placeholder="Tu nombre" value={values.nombre} onChange={handleChange} style={{pading: '20px'}} />
-      {errors.nombre && <span style={{color: 'red'}}>{errors.nombre}</span>}
+    <main className="jobs-search" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <h1 style={{ justifyContent: 'center' }}>Contacto</h1>
+      <p style={{ textAlign: 'center' }}>Ponte en contacto con nuestro equipo de soporte.</p>
+      
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%', maxWidth: '600px' }}>
+        
+        {/* Usamos un div envoltorio para que herede el estilo 'form > div' del CSS */}
+        <div className="search-bar">
+          <input 
+            name="nombre" 
+            type="text"
+            placeholder="Tu nombre completo" 
+            value={values.nombre} 
+            onChange={handleChange} 
+          />
+        </div>
+        {errors.nombre && <span style={{color: '#ff4444', marginTop: '-1rem', marginLeft: '1rem'}}>{errors.nombre}</span>}
 
-      <input name="email" placeholder="Tu email" value={values.email} onChange={handleChange} />
-      {errors.email && <span style={{color: 'red'}}>{errors.email}</span>}
+        <div className="search-bar">
+          <input 
+            name="email" 
+            type="email" /* Cambiado a email */
+            placeholder="tu@email.com" 
+            value={values.email} 
+            onChange={handleChange} 
+          />
+        </div>
+        {errors.email && <span style={{color: '#ff4444', marginTop: '-1rem', marginLeft: '1rem'}}>{errors.email}</span>}
 
-      <textarea name="mensaje" placeholder="Tu mensaje" value={values.mensaje} onChange={handleChange} />
-      <button type="submit" style={{fontWeight: 'bold', fontSize: '20px'}}>Enviar</button>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-    </form>
-    
+        <div className="search-bar" style={{alignItems: 'start'}}>
+          <textarea 
+            name="mensaje" 
+            placeholder="¿En qué podemos ayudarte?" 
+            value={values.mensaje} 
+            onChange={handleChange} 
+            style={{ 
+              flex: 1, 
+              background: 'transparent', 
+              border: 'none', 
+              outline: 'none', 
+              color: 'white', 
+              padding: '0.75rem 0.5rem',
+              minHeight: '150px',
+              fontFamily: 'inherit',
+              resize: 'none'
+            }}
+          />
+        </div>
+        
+        <button type="submit" style={{ width: 'fit-content', paddingInline: '3rem', alignSelf: 'center' }}>
+          Enviar Mensaje
+        </button>
+
+      </form>
+    </main>
   );
 }
