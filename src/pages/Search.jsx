@@ -94,13 +94,12 @@ export function SearchPage() {
     handleTextFilter
   } = useFilters();
 
-  useEffect(() => {
-    document.title = `Resultados: ${total}, Página ${currentPage} - DevJobs`;
-  }, [total, currentPage]);
-
+  const title = loading ? `Cargando...` : `Resultados: ${total}, Página${currentPage} - DevJobs`;
 
   return (
     <main>
+      <title>{title}</title>
+      <meta name="description" content="Explora miles de oportunidades laborales en el sector tecnológico. Encuentra tu próximo empleo en DevJobs." />
       <SearchFormSection onSearch={handleSearch} onTextFilter={handleTextFilter} />
       <section>
         {
