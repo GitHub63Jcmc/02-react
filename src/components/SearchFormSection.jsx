@@ -1,8 +1,8 @@
-import { useId, useState} from 'react';
+import { useId, useState, useRef } from 'react';
 
-let timeoutId = null;
 
 const useSearchForm = (idTechnology, idLocation, idExperienceLevel, idText, onSearch, onTextFilter) => {
+  const timeoutId = useRef(null);
   const [searchText, setSearchText] = useState('');
 
   const handleSubmit = (event) => {
@@ -28,11 +28,11 @@ const useSearchForm = (idTechnology, idLocation, idExperienceLevel, idText, onSe
     setSearchText(text); // Actualizamos el input inmediatamente
 
     // DEBOUNCE: Cancelar el timeout anterior
-    if (timeoutId) {
-      clearTimeout(timeoutId);
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current);
     }
 
-    timeoutId = setTimeout(() => {
+    timeoutId.current = setTimeout(() => {
       onTextFilter(text);
     }, 500);
   }
@@ -50,11 +50,20 @@ export function SearchFormSection ({onTextFilter, onSearch}) {
   const idTechnology = useId();
   const idLocation = useId();
   const idExperienceLevel = useId();
+  const inputRef = useRef(null);
 
   const {
     handleSubmit, 
     handleTextChange
-  } = useSearchForm(idTechnology, idLocation, idExperienceLevel, idText, onSearch, onTextFilter );
+  } = useSearchForm({idTechnology, idLocation, idExperienceLevel, idText, onSearch, onTextFilter });
+
+  const handleClearInput = (event) => {
+    event.preventDefault();
+    console.log(inputRef);
+
+    inputRef.current.value = '';
+    onTextFilter('');
+  } 
 
   return (
     <section className="jobs-search">
@@ -71,10 +80,17 @@ export function SearchFormSection ({onTextFilter, onSearch}) {
             <path d="M21 21l-6 -6" />
           </svg>
 
-          <input name={idText} id="empleos-search-input" type="text"
-            placeholder="Buscar trabajos, empresas o habilidades" onChange={handleTextChange}
+          <input 
+            ref={inputRef}
+            name={idText} id="empleos-search-input" type="text"
+            placeholder="Buscar trabajos, empresas o habilidades"
+             onChange={handleTextChange}
           />
-  
+
+          <button onClick={handleClearInput}>
+            ❌
+          </button>
+          
         </div>
 
         <div className="search-filters">
